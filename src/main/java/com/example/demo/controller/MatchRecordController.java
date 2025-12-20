@@ -1,7 +1,7 @@
-package com.example.barter.controller;
+package com.example.demo.controller;
 
-import com.example.barter.entity.MatchRecord;
-import com.example.barter.service.MatchRecordService;
+import com.example.demo.entity.MatchRecord;
+import com.example.demo.service.MatchRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
