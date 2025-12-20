@@ -16,29 +16,25 @@ public class SkillRequest {
     private User user;
 
     @ManyToOne(optional = false)
-    private SkillCategory skillCategory;
+    private Skill skill;
 
     @Column(nullable = false)
-    private String skillName;
-
-    @Column(nullable = false)
-    private String requiredLevel; // BEGINNER / INTERMEDIATE / EXPERT
+    private String requiredLevel;
 
     @Column(nullable = false)
     private String status = "OPEN";
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "request")
-    private List<SkillMatch> matches;
+    private List<MatchRecord> matches;
 
     public SkillRequest() {}
 
-    public SkillRequest(User user, SkillCategory skillCategory, String skillName, String requiredLevel) {
+    public SkillRequest(User user, Skill skill, String requiredLevel) {
         this.user = user;
-        this.skillCategory = skillCategory;
-        this.skillName = skillName;
+        this.skill = skill;
         this.requiredLevel = requiredLevel;
     }
 

@@ -16,12 +16,7 @@ public class SkillOffer {
     private User user;
 
     @ManyToOne(optional = false)
-    private SkillCategory skillCategory;
-
-    @Column(nullable = false)
-    private String skillName;
-
-    private String description;
+    private Skill skill;
 
     @Column(nullable = false)
     private String experienceLevel; // BEGINNER / INTERMEDIATE / EXPERT
@@ -29,18 +24,17 @@ public class SkillOffer {
     @Column(nullable = false)
     private String availability = "AVAILABLE";
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "offer")
-    private List<SkillMatch> matches;
+    private List<MatchRecord> matches;
 
     public SkillOffer() {}
 
-    public SkillOffer(User user, SkillCategory skillCategory, String skillName, String experienceLevel) {
+    public SkillOffer(User user, Skill skill, String experienceLevel) {
         this.user = user;
-        this.skillCategory = skillCategory;
-        this.skillName = skillName;
+        this.skill = skill;
         this.experienceLevel = experienceLevel;
     }
 
