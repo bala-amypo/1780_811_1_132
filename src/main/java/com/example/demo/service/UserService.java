@@ -1,4 +1,4 @@
-package com.example.barter.service;
+package com.example.demo.service;
 
 import com.example.barter.entity.User;
 
