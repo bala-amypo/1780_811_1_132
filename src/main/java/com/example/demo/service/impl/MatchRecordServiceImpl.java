@@ -1,57 +1,33 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.MatchRecord;
-import com.example.demo.entity.SkillOffer;
-import com.example.demo.entity.SkillRequest;
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.MatchRecordRepository;
-import com.example.demo.repository.SkillOfferRepository;
-import com.example.demo.repository.SkillRequestRepository;
+import com.example.demo.service.MatchRecordService;
 import com.example.demo.service.MatchmakingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MatchmakingServiceImpl implements MatchmakingService {
+public class MatchRecordServiceImpl implements MatchRecordService {
 
-    private final MatchRecordRepository matchRecordRepository;
-    private final SkillOfferRepository skillOfferRepository;
-    private final SkillRequestRepository skillRequestRepository;
+    private final MatchmakingService matchmakingService;
 
-    public MatchmakingServiceImpl(
-            MatchRecordRepository matchRecordRepository,
-            SkillOfferRepository skillOfferRepository,
-            SkillRequestRepository skillRequestRepository) {
-        this.matchRecordRepository = matchRecordRepository;
-        this.skillOfferRepository = skillOfferRepository;
-        this.skillRequestRepository = skillRequestRepository;
+    public MatchRecordServiceImpl(MatchmakingService matchmakingService) {
+        this.matchmakingService = matchmakingService;
     }
 
     @Override
     public MatchRecord createMatch(Long offerId, Long requestId) {
-
-        SkillOffer offer = skillOfferRepository.findById(offerId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("SkillOffer not found with id: " + offerId));
-
-        SkillRequest request = skillRequestRepository.findById(requestId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("SkillRequest not found with id: " + requestId));
-
-        MatchRecord matchRecord = new MatchRecord(offer, request);
-        return matchRecordRepository.save(matchRecord);
+        return matchmakingService.createMatch(offerId, requestId);
     }
 
     @Override
-    public MatchRecord getMatchById(Long matchId) {
-        return matchRecordRepository.findById(matchId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("MatchRecord not found with id: " + matchId));
+    public MatchRecord getById(Long id) {
+        return matchmakingService.getMatchById(id);
     }
 
     @Override
-    public List<MatchRecord> getAllMatches() {
-        return matchRecordRepository.findAll();
+    public List<MatchRecord> getAll() {
+        return matchmakingService.getAllMatches();
     }
 }

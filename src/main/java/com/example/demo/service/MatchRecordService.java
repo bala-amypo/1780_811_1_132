@@ -3,11 +3,11 @@ package com.example.demo.service;
 import com.example.demo.entity.MatchRecord;
 import java.util.List;
 
-public interface MatchmakingService {
+public interface MatchRecordService {
 
     MatchRecord createMatch(Long offerId, Long requestId);
 
-    MatchRecord getMatchById(Long matchId);
+    MatchRecord getById(Long id);
 
-    List<MatchRecord> getAllMatches();
+    List<MatchRecord> getAll();
 }
