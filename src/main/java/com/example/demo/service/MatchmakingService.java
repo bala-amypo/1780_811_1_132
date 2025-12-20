@@ -1,14 +1,13 @@
-package com.example.barter.service;
+package com.example.demo.service;
 
-import com.example.barter.entity.MatchRecord;
-
+import com.example.demo.entity.MatchRecord;
 import java.util.List;
 
-public interface MatchRecordService {
+public interface MatchmakingService {
 
     MatchRecord createMatch(Long offerId, Long requestId);
 
-    MatchRecord getById(Long id);
+    MatchRecord getMatchById(Long matchId);
 
-    List<MatchRecord> getAll();
+    List<MatchRecord> getAllMatches();
 }

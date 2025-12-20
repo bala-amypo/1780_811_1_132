@@ -1,56 +1,57 @@
-package com.example.barter.service.impl;
+package com.example.demo.service.impl;
 
-import com.example.barter.entity.MatchRecord;
-import com.example.barter.entity.SkillOffer;
-import com.example.barter.entity.SkillRequest;
-import com.example.barter.exception.ResourceNotFoundException;
-import com.example.barter.repository.MatchRecordRepository;
-import com.example.barter.repository.SkillOfferRepository;
-import com.example.barter.repository.SkillRequestRepository;
-import com.example.barter.service.MatchRecordService;
+import com.example.demo.entity.MatchRecord;
+import com.example.demo.entity.SkillOffer;
+import com.example.demo.entity.SkillRequest;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.MatchRecordRepository;
+import com.example.demo.repository.SkillOfferRepository;
+import com.example.demo.repository.SkillRequestRepository;
+import com.example.demo.service.MatchmakingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MatchRecordServiceImpl implements MatchRecordService {
+public class MatchmakingServiceImpl implements MatchmakingService {
 
-    private final MatchRecordRepository matchRepository;
-    private final SkillOfferRepository offerRepository;
-    private final SkillRequestRepository requestRepository;
+    private final MatchRecordRepository matchRecordRepository;
+    private final SkillOfferRepository skillOfferRepository;
+    private final SkillRequestRepository skillRequestRepository;
 
-    public MatchRecordServiceImpl(MatchRecordRepository matchRepository,
-                                  SkillOfferRepository offerRepository,
-                                  SkillRequestRepository requestRepository) {
-        this.matchRepository = matchRepository;
-        this.offerRepository = offerRepository;
-        this.requestRepository = requestRepository;
+    public MatchmakingServiceImpl(
+            MatchRecordRepository matchRecordRepository,
+            SkillOfferRepository skillOfferRepository,
+            SkillRequestRepository skillRequestRepository) {
+        this.matchRecordRepository = matchRecordRepository;
+        this.skillOfferRepository = skillOfferRepository;
+        this.skillRequestRepository = skillRequestRepository;
     }
 
     @Override
     public MatchRecord createMatch(Long offerId, Long requestId) {
 
-        SkillOffer offer = offerRepository.findById(offerId)
+        SkillOffer offer = skillOfferRepository.findById(offerId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Skill offer not found"));
+                        new ResourceNotFoundException("SkillOffer not found with id: " + offerId));
 
-        SkillRequest request = requestRepository.findById(requestId)
+        SkillRequest request = skillRequestRepository.findById(requestId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Skill request not found"));
+                        new ResourceNotFoundException("SkillRequest not found with id: " + requestId));
 
-        MatchRecord match = new MatchRecord(offer, request);
-        return matchRepository.save(match);
+        MatchRecord matchRecord = new MatchRecord(offer, request);
+        return matchRecordRepository.save(matchRecord);
     }
 
     @Override
-    public MatchRecord getById(Long id) {
-        return matchRepository.findById(id)
+    public MatchRecord getMatchById(Long matchId) {
+        return matchRecordRepository.findById(matchId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Match record not found"));
+                        new ResourceNotFoundException("MatchRecord not found with id: " + matchId));
     }
 
     @Override
-    public List<MatchRecord> getAll() {
-        return matchRepository.findAll();
+    public List<MatchRecord> getAllMatches() {
+        return matchRecordRepository.findAll();
     }
 }
