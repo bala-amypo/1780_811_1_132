@@ -15,38 +15,29 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String fullName;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String password; // hashed only
-
-    private String location;
+    private String password; // hashed
 
     @Column(nullable = false)
     private String role = "USER";
 
     @Column(nullable = false)
-    private Double rating = 0.0;
-
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "user")
-    private List<SkillOffer> skillOffers;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserProfile profile;
 
     @OneToMany(mappedBy = "user")
-    private List<SkillRequest> skillRequests;
+    private List<SkillOffer> offers;
 
-    @OneToMany(mappedBy = "matchedBy")
-    private List<SkillMatch> matchesCreated;
+    @OneToMany(mappedBy = "user")
+    private List<SkillRequest> requests;
 
     public User() {}
 
-    public User(String fullName, String email, String password, String role) {
-        this.fullName = fullName;
+    public User(String email, String password, String role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -55,13 +46,10 @@ public class User {
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
-        if (this.rating == null) {
-            this.rating = 0.0;
-        }
         if (this.role == null) {
             this.role = "USER";
         }
     }
 
-    // Getters and setters omitted for brevity (can be generated)
+    // getters & setters
 }
