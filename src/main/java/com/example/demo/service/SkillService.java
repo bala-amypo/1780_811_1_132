@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.barter.entity.Skill;
+import com.example.demo.entity.Skill;
 
 import java.util.List;
 

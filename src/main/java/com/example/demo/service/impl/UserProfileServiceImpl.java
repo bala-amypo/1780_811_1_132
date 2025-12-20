@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.barter.entity.UserProfile;
-import com.example.barter.exception.ResourceNotFoundException;
-import com.example.barter.repository.UserProfileRepository;
-import com.example.barter.service.UserProfileService;
+import com.example.demo.entity.UserProfile;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.UserProfileRepository;
+import com.example.demo.service.UserProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

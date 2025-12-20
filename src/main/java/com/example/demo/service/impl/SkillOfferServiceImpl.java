@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.barter.entity.SkillOffer;
-import com.example.barter.exception.ResourceNotFoundException;
-import com.example.barter.repository.SkillOfferRepository;
-import com.example.barter.service.SkillOfferService;
+import com.example.demo.entity.SkillOffer;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.SkillOfferRepository;
+import com.example.demo.service.SkillOfferService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

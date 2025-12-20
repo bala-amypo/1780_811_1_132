@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.barter.entity.User;
+import com.example.demo.entity.User;
 
 public interface UserService {
 

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.barter.entity.UserProfile;
+import com.example.demo.entity.UserProfile;
 
 import java.util.List;
 
