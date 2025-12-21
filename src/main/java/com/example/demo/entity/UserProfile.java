@@ -10,29 +10,43 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-    private String location;
-    private Double rating;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    public UserProfile() {}
+    private String address;
+    private String phone;
+
+    // ===== Getters & Setters =====
 
     public Long getId() {
         return id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getLocation() {
-        return location;
+    public Long getUserId() {
+        return userId;
     }
 
-    public Double getRating() {
-        return rating;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
