@@ -1,11 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.UserProfile;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.example.demo.entity.UserProfile;
 
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
 
-    Optional<UserProfile> findByUserId(Long userId);
-}
+    Optional<UserProfile> findByUser_Id(Long userId);
