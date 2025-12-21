@@ -5,10 +5,10 @@ import com.example.demo.service.UserProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/profiles")
+@RequestMapping("/api/user-profile")
 public class UserProfileController {
 
     private final UserProfileService userProfileService;
@@ -17,20 +17,13 @@ public class UserProfileController {
         this.userProfileService = userProfileService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserProfile> getProfile(@PathVariable Long id) {
-        return ResponseEntity.ok(userProfileService.getById(id));
-    }
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserProfile> getProfile(@PathVariable Long userId) {
 
-    @GetMapping
-    public ResponseEntity<List<UserProfile>> getAllProfiles() {
-        return ResponseEntity.ok(userProfileService.getAll());
-    }
+        Optional<UserProfile> profile = userProfileService.getProfileByUserId(userId);
 
-    @PutMapping("/{id}/rating")
-    public ResponseEntity<UserProfile> updateRating(
-            @PathVariable Long id,
-            @RequestParam Double rating) {
-        return ResponseEntity.ok(userProfileService.updateRating(id, rating));
+        return profile
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
