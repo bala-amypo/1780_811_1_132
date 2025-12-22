@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-
+@Data
 @Entity
 @Table(name = "skills", uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")

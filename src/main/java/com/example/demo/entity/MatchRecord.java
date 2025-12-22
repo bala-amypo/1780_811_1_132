@@ -2,7 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+@Data
 @Entity
 @Table(name = "match_records")
 public class MatchRecord {
