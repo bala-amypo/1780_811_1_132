@@ -1,16 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.SkillOffer;
-
 import java.util.List;
 
 public interface SkillOfferService {
 
     SkillOffer createOffer(SkillOffer offer);
 
-    SkillOffer getById(Long id);
+    SkillOffer getOfferById(Long id);
 
-    List<SkillOffer> getByProfile(Long profileId);
+    List<SkillOffer> getOffersByUser(Long userId);
 
-    List<SkillOffer> getAvailable();
+    List<SkillOffer> getAllOffers();
+
+    void deleteOffer(Long id);
 }
