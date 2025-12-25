@@ -2,28 +2,30 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.UserProfile;
 import com.example.demo.service.UserProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/user-profile")
+@RequestMapping("/user-profiles")
 public class UserProfileController {
 
-    private final UserProfileService userProfileService;
+    @Autowired
+    private UserProfileService userProfileService;
 
-    public UserProfileController(UserProfileService userProfileService) {
-        this.userProfileService = userProfileService;
+    @PostMapping
+    public ResponseEntity<UserProfile> create(@RequestBody UserProfile profile) {
+        return ResponseEntity.ok(userProfileService.createUser(profile));
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserProfile> getProfile(@PathVariable Long userId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UserProfile> get(@PathVariable Long id) {
+        return ResponseEntity.ok(userProfileService.getUserById(id));
+    }
 
-        Optional<UserProfile> profile = userProfileService.getProfileByUserId(userId);
-
-        return profile
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deactivate(@PathVariable Long id) {
+        userProfileService.deactivateUser(id);
+        return ResponseEntity.ok().build();
     }
 }
