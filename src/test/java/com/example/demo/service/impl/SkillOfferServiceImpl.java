@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.SkillOffer;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.SkillOfferRepository;
 import com.example.demo.service.SkillOfferService;
 import org.springframework.stereotype.Service;
@@ -11,31 +10,35 @@ import java.util.List;
 @Service
 public class SkillOfferServiceImpl implements SkillOfferService {
 
-    private final SkillOfferRepository offerRepository;
+    private final SkillOfferRepository repository;
 
-    public SkillOfferServiceImpl(SkillOfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
+    public SkillOfferServiceImpl(SkillOfferRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public SkillOffer createOffer(SkillOffer offer) {
-        return offerRepository.save(offer);
+        return repository.save(offer);
     }
 
     @Override
-    public SkillOffer getById(Long id) {
-        return offerRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Skill offer not found"));
+    public SkillOffer getOfferById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Offer not found"));
     }
 
     @Override
-    public List<SkillOffer> getByProfile(Long profileId) {
-        return offerRepository.findByUserId(profileId);
+    public List<SkillOffer> getOffersByUser(Long userId) {
+        return repository.findByUserId(userId);
     }
 
     @Override
-    public List<SkillOffer> getAvailable() {
-        return offerRepository.findByAvailability("AVAILABLE");
+    public List<SkillOffer> getAllOffers() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void deleteOffer(Long id) {
+        repository.deleteById(id);
     }
 }
