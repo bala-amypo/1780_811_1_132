@@ -8,10 +8,17 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    private final String SECRET_KEY = "secret-key-123456";
-    private final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
+    // Secret key (hardcoded for demo & tests)
+    private static final String SECRET_KEY = "skill-barter-secret-key-12345";
 
+    // Token validity: 1 hour
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60;
+
+    /**
+     * Generate JWT token
+     */
     public String generateToken(String email, String role, Long userId) {
+
         return Jwts.builder()
                 .setSubject(email)
                 .claim("role", role)
@@ -22,27 +29,44 @@ public class JwtUtil {
                 .compact();
     }
 
+    /**
+     * Validate token signature & expiration
+     */
     public boolean validateToken(String token) {
         try {
-            getClaims(token);
+            Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    /**
+     * Extract email (subject)
+     */
     public String extractEmail(String token) {
         return getClaims(token).getSubject();
     }
 
+    /**
+     * Extract role claim
+     */
     public String extractRole(String token) {
         return getClaims(token).get("role", String.class);
     }
 
+    /**
+     * Extract userId claim
+     */
     public Long extractUserId(String token) {
         return getClaims(token).get("userId", Long.class);
     }
 
+    /**
+     * Internal helper
+     */
     private Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
