@@ -1,17 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.SkillOffer;
+import com.example.demo.model.SkillOffer;
 import com.example.demo.service.SkillOfferService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/skill-offers")
+@RequestMapping("/api/offers")
 public class SkillOfferController {
 
-    @Autowired
-    private SkillOfferService skillOfferService;
+    private final SkillOfferService skillOfferService;
+
+    public SkillOfferController(SkillOfferService skillOfferService) {
+        this.skillOfferService = skillOfferService;
+    }
 
     @PostMapping
     public ResponseEntity<SkillOffer> create(@RequestBody SkillOffer offer) {

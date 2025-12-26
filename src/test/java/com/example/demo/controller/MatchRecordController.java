@@ -1,17 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.MatchRecord;
+import com.example.demo.model.MatchRecord;
 import com.example.demo.service.MatchmakingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/matches")
+@RequestMapping("/api/matches")
 public class MatchRecordController {
 
-    @Autowired
-    private MatchmakingService matchmakingService;
+    private final MatchmakingService matchmakingService;
+
+    public MatchRecordController(MatchmakingService matchmakingService) {
+        this.matchmakingService = matchmakingService;
+    }
 
     @PostMapping("/generate/{requestId}")
     public ResponseEntity<MatchRecord> generate(@PathVariable Long requestId) {

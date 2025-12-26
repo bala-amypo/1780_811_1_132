@@ -1,26 +1,22 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.model.AppUser;
+import com.example.demo.repository.AppUserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
+    private final AppUserRepository appUserRepository;
 
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
+    public UserServiceImpl(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
-    public User findByEmail(String email) {
-        return repository.findByEmail(email);
-    }
-
-    @Override
-    public User save(User user) {
-        return repository.save(user);
+    public AppUser findByEmail(String email) {
+        return appUserRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
