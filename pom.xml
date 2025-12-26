@@ -14,7 +14,7 @@
     <name>Skill Barter Matchmaking Platform</name>
 
     <!-- ========================= -->
-    <!-- SPRING BOOT PARENT -->
+    <!-- Spring Boot Parent -->
     <!-- ========================= -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,15 +23,12 @@
         <relativePath/>
     </parent>
 
-    <!-- ========================= -->
-    <!-- JAVA VERSION -->
-    <!-- ========================= -->
     <properties>
         <java.version>17</java.version>
     </properties>
 
     <!-- ========================= -->
-    <!-- DEPENDENCIES -->
+    <!-- Dependencies -->
     <!-- ========================= -->
     <dependencies>
 
@@ -66,14 +63,12 @@
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
         </dependency>
-
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
@@ -81,14 +76,14 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Swagger / OpenAPI (Spring Boot 3) -->
+        <!-- Swagger / OpenAPI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.5.0</version>
         </dependency>
 
-        <!-- Lombok (optional but safe) -->
+        <!-- Lombok (optional but useful) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -96,7 +91,7 @@
         </dependency>
 
         <!-- ========================= -->
-        <!-- TESTING -->
+        <!-- Testing -->
         <!-- ========================= -->
 
         <!-- TestNG -->
@@ -131,7 +126,7 @@
     </dependencies>
 
     <!-- ========================= -->
-    <!-- BUILD CONFIG -->
+    <!-- Build / Plugins -->
     <!-- ========================= -->
     <build>
         <plugins>
@@ -142,7 +137,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Surefire Plugin (FOR TESTNG XML) -->
+            <!-- Surefire Plugin for TestNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
