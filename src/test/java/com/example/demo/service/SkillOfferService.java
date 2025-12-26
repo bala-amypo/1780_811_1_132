@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.SkillOffer;
+import com.example.demo.model.SkillOffer;
+
 import java.util.List;
 
 public interface SkillOfferService {
@@ -10,8 +11,4 @@ public interface SkillOfferService {
     SkillOffer getOfferById(Long id);
 
     List<SkillOffer> getOffersByUser(Long userId);
-
-    List<SkillOffer> getAllOffers();
-
-    void deleteOffer(Long id);
 }

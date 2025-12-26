@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.MatchRecord;
+import com.example.demo.model.MatchRecord;
+
 import java.util.List;
 
 public interface MatchmakingService {
