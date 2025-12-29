@@ -1,5 +1,3 @@
-TestResultListener 
-
 package com.example.demo;
  
 import org.testng.ITestListener;
